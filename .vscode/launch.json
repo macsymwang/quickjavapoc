@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<quick.poc>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.telus.mediationcloud.quick.poc.Application",
+            "projectName": "quick.poc",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
