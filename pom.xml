@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.telus.mediationcloud</groupId>
 	<artifactId>quick.poc</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>quick.poc</name>
 	<description>POC project for Spring Boot</description>
 	<properties>
