@@ -1,11 +1,13 @@
 package com.telus.mediationcloud.quick.poc;
 
+import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
-
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -18,9 +20,11 @@ public class FileName implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        // Get File Name from full path
         String fileFullName = "gs://ccs_data_tdr_process_np-c0f674/db_load/SUODS_FWHSIA_ID_20230203_1_meta_agentmetaname-CloudDBExtractionPublisher.json";
         log.info("File name:" + FilenameUtils.getName(fileFullName));
 
+        // Parsing String to date
         String endTime = "65535-12-31T23:59:59.999999Z";
         Date endTimeDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse(endTime);
         System.out.println("endTimeDate:" + endTimeDate);
@@ -28,6 +32,11 @@ public class FileName implements CommandLineRunner {
         endTime = "2023-02-16T16:14:04.000000Z";
         endTimeDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse(endTime);
         System.out.println("endTimeDate:" + endTimeDate);
+
+        // Log format for Json to one String line
+        String contents = FileUtils.readFileToString(new File("./TelusBalanceThresholdModifyEvent.json"),
+                StandardCharsets.UTF_8);
+        log.info(contents.replaceAll("[\r\n]+", " "));
     }
 
 }
