@@ -39,6 +39,9 @@ public class FileName implements CommandLineRunner {
         Date endTimeDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse(endTime);
         log.info("endTimeDate in:" + endTime + " Out:" + endTimeDate);
 
+        String dateParrten = "yyyy-MM-dd'T'HH:mm:ss.SSSX";
+        log.info("endTimeDate DateUtils in:" + endTime + " Out:" + DateUtils.parseDate(endTime, dateParrten));
+
         // Parse normal date String
         endTime = "2023-02-16T16:14:04.000000Z";
         endTimeDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse(endTime);
@@ -59,8 +62,6 @@ public class FileName implements CommandLineRunner {
 
         Date date = DateUtils.parseDate(strDate, dateFormat);
         log.info("ISODatetoUTCDate Reverse: In:" + strDate + " Out:" + date);
-
-        
 
         // Log format for Json to one String line
         String contents = FileUtils.readFileToString(new File("./TelusBalanceThresholdModifyEvent.json"),
