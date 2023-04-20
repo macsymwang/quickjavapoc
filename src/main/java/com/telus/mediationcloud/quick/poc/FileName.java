@@ -30,25 +30,40 @@ public class FileName implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        // Format bill_cycle_cd
+        String FullCycle = String.format("%1$d%2$02d%3$02d", 2023, 11, 12);
+        log.info("FullCycle:" + FullCycle);
+
         // Get File Name from full path
         String fileFullName = "gs://ccs_data_tdr_process_np-c0f674/db_load/SUODS_FWHSIA_ID_20230203_1_meta_agentmetaname-CloudDBExtractionPublisher.json";
         log.info("File name:" + FilenameUtils.getName(fileFullName));
+        loggerTest(true);
+
+        // String format
+        String format = "%08d";
+        String seq = "105";
+        log.info("Formatted String:" + String.format(format, Integer.parseInt(seq)));
+
+        Date endTimeDate = null;
+        endTimeDate = new Date();
+        String strDate = new SimpleDateFormat("yyyyMMddHHmmss").format(endTimeDate);
+        System.out.println(endTimeDate);
+        log.info("Formatted current date:" + strDate);
 
         // Parsing String to date
         String endTime = "65535-12-31T23:59:59.999999Z";
-        Date endTimeDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse(endTime);
-        log.info("endTimeDate in:" + endTime + " Out:" + endTimeDate);
-
         String dateParrten = "yyyy-MM-dd'T'HH:mm:ss.SSSX";
         log.info("endTimeDate DateUtils in:" + endTime + " Out:" + DateUtils.parseDate(endTime, dateParrten));
 
         // Parse normal date String
         endTime = "2023-02-16T16:14:04.000000Z";
-        endTimeDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse(endTime);
-        log.info("endTimeDate in:" + endTime + " Out:" + endTimeDate);
+        // endTimeDate = new
+        // SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse(endTime);
+        // log.info("endTimeDate in:" + endTime + " Out:" + endTimeDate);
 
         // ISODatetoUTCDate
-        endTime = "2023-03-10T00:00:00-05:00";
+        endTime = "2023-05-05T00:00:00-04:00";
         TemporalAccessor ta = DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(endTime);
         Date dateTA = new Date(Instant.from(ta).toEpochMilli());
         log.info("ISODatetoUTCDate to Date: In:" + endTime + " Out:" + dateTA);
@@ -57,7 +72,7 @@ public class FileName implements CommandLineRunner {
         ZonedDateTime zdt = ZonedDateTime.ofInstant(i, ZoneId.of("Z"));
         String dateFormat = "YYYYMMddHHmmss";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateFormat);
-        String strDate = zdt.format(dtf);
+        strDate = zdt.format(dtf);
         log.info("ISODatetoUTCDate to String : In:" + endTime + " Out:" + strDate);
 
         Date date = DateUtils.parseDate(strDate, dateFormat);
@@ -68,6 +83,12 @@ public class FileName implements CommandLineRunner {
                 StandardCharsets.UTF_8);
         // log.info(contents.replaceAll("[\r\n]+", " "));
 
+        String longStr = "012345";
+        log.info("convert to long:" + Long.parseLong(longStr));
+    }
+
+    private void loggerTest(boolean isTrue) {
+        log.info("Logger test: " + isTrue);
     }
 
 }
