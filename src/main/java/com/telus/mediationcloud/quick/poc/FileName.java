@@ -22,6 +22,10 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -58,12 +62,10 @@ public class FileName implements CommandLineRunner {
 
         // Parse normal date String
         endTime = "2023-02-16T16:14:04.000000Z";
-        // endTimeDate = new
-        // SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse(endTime);
-        // log.info("endTimeDate in:" + endTime + " Out:" + endTimeDate);
 
         // ISODatetoUTCDate
         endTime = "2023-05-05T00:00:00-04:00";
+        endTime = "+65535-12-31T23:59:59.999999Z";
         TemporalAccessor ta = DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(endTime);
         Date dateTA = new Date(Instant.from(ta).toEpochMilli());
         log.info("ISODatetoUTCDate to Date: In:" + endTime + " Out:" + dateTA);
@@ -85,6 +87,16 @@ public class FileName implements CommandLineRunner {
 
         String longStr = "012345";
         log.info("convert to long:" + Long.parseLong(longStr));
+
+        // for +655351231235959
+        String dateFormatEDR = "YYYYMMddHHmmss";
+        String inDate = "+655351231235959";
+        DateTimeFormatter inFormatter = DateTimeFormat.forPattern(dateFormatEDR);
+        DateTime CurrentPeriodEndTime = inFormatter.parseDateTime(inDate);
+
+        Date day = DateUtils.truncate(CurrentPeriodEndTime.toDate(), Calendar.DATE); //
+        log.info("convert to dateFormatEDR:" + day);
+
     }
 
     private void loggerTest(boolean isTrue) {
