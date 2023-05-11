@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
@@ -99,11 +100,21 @@ public class FileName implements CommandLineRunner {
 
         Date day = formatter1.parse(inDate);
         log.info("convert to dateFormatEDR:" + day);
-
+        getMaxDate();
     }
 
     private void loggerTest(boolean isTrue) {
         log.info("Logger test: " + isTrue);
+    }
+
+    private Date getMaxDate() {
+        String dateStr = "+65535-12-31T23:59:59Z";
+        DateTimeFormatter dtf = DateTimeFormatter.ISO_DATE_TIME;
+        LocalDateTime ldt = dtf.parse(dateStr, LocalDateTime::from);
+        ZonedDateTime zdt = ldt.atZone(ZoneId.systemDefault());
+        Date output = Date.from(zdt.toInstant());
+        log.info("convert to max date:" + output);
+        return output;
     }
 
 }
