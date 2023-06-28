@@ -33,7 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 //@Slf4j
-@Component
+// @Component
 public class FileName implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(FileName.class);
 
