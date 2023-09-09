@@ -25,7 +25,8 @@
 			"extensions": [
 				"streetsidesoftware.code-spell-checker",
 				"vscjava.vscode-java-pack",
-				"vscjava.vscode-spring-boot-dashboard"
+				"vscjava.vscode-spring-boot-dashboard",
+				"redhat.fabric8-analytics"
 			]
 		}
 	}
