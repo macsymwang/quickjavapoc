@@ -15,6 +15,8 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
+import java.util.UUID;
+import java.nio.ByteBuffer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -32,10 +34,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//@Slf4j
+@Slf4j
 @Component
 public class FileName implements CommandLineRunner {
-    private static final Logger log = LoggerFactory.getLogger(FileName.class);
+    // private static final java.util.logging.Logger log =
+    // LoggerFactory.getLogger(FileName.class);
 
     @Override
     public void run(String... args) throws Exception {
@@ -48,6 +51,14 @@ public class FileName implements CommandLineRunner {
         String fileFullName = "gs://ccs_data_tdr_process_np-c0f674/db_load/SUODS_FWHSIA_ID_20230203_1_meta_agentmetaname-CloudDBExtractionPublisher.json";
         log.info("File name:" + FilenameUtils.getName(fileFullName));
         loggerTest(true);
+
+        // Hash file name to long
+        UUID uuid = UUID.nameUUIDFromBytes(fileFullName.getBytes());
+        ByteBuffer bb = ByteBuffer.wrap(new byte[64]);
+        bb.putLong(uuid.getMostSignificantBits());
+        bb.putLong(uuid.getLeastSignificantBits());
+        long result = ByteBuffer.wrap(bb.array()).asLongBuffer().get();
+        log.info("UUID from String " + (result & Long.MAX_VALUE));
 
         // String format
         String format = "%08d";
