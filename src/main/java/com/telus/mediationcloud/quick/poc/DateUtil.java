@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-// @Component
+@Component
 public class DateUtil implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(DateUtil.class);
 
