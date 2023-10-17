@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
-@Component
+// @Component
 public class CounterHelper implements CommandLineRunner {
 
     @Autowired
