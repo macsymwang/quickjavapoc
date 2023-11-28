@@ -27,12 +27,16 @@ public class DateUtil implements CommandLineRunner {
 
         String sDate3 = "2023-12-26T20:47:47Z";
         Date date3 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(sDate3);
-        TimeZone tz = TimeZone.getTimeZone("America/Toronto");
+        TimeZone tz = TimeZone.getTimeZone("US/Alaska");
         System.out.println(sDate3 + " in day light saving:\t" + tz.inDaylightTime(date3));
 
         sDate3 = "2023-08-26T20:47:47Z";
         date3 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(sDate3);
         System.out.println(sDate3 + " in day light saving:\t" + tz.inDaylightTime(date3));
+
+        String sDate4 = "2023-09-10T09:04:35.000000-06:00";
+        Date date4 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").parse(sDate4);
+        System.out.println(sDate4 + " to date :\t" + date4);
 
     }
 }
