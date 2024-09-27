@@ -35,7 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Slf4j
-// @Component
+@Component
 public class FileName implements CommandLineRunner {
     // private static final java.util.logging.Logger log =
     // LoggerFactory.getLogger(FileName.class);
@@ -112,6 +112,10 @@ public class FileName implements CommandLineRunner {
         Date day = formatter1.parse(inDate);
         log.info("convert to dateFormatEDR:" + day);
         getMaxDate();
+
+        String specialFileName = "inbox/subfolder/SGW_SGSN_RAW_CIPDR_RawLoad_Split13_00003_20240920171314.csv.gz";
+        processFileName(specialFileName);
+
     }
 
     private void loggerTest(boolean isTrue) {
@@ -126,6 +130,19 @@ public class FileName implements CommandLineRunner {
         Date output = Date.from(zdt.toInstant());
         log.info("convert to max date:" + output);
         return output;
+    }
+
+    private void processFileName(String fileName) {
+        fileName = "";
+
+        String name = FilenameUtils.getName(fileName);
+        log.info("File Name :" + name);
+
+        String path = FilenameUtils.getPath(fileName);
+        log.info("path Name :" + path);
+
+        String folderName = StringUtils.substringBefore(path, "/");
+        log.info("folderName Name :" + folderName);
     }
 
 }

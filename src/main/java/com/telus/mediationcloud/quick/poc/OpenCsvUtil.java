@@ -25,7 +25,7 @@ import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 @Slf4j
-@Component
+// @Component
 public class OpenCsvUtil implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
@@ -39,7 +39,7 @@ public class OpenCsvUtil implements CommandLineRunner {
         List<EmployeePojo> employees = new ArrayList();
         employees.add(employee);
 
-        //method 1 by opencsv
+        // method 1 by opencsv
         StringWriter writer = new StringWriter();
         HeaderColumnNameMappingStrategy strategy = new HeaderColumnNameMappingStrategy();
         strategy.setType(EmployeePojo.class);
