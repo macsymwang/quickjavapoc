@@ -132,13 +132,27 @@ public class FileName implements CommandLineRunner {
     }
 
     private void processFileName() {
-        String fileName = "inbox/subfolder/SGW_SGSN_RAW.CIPDR#RawLoad_Split13_00003_20240920171314.csv.gz";
+        String fileName = "inbox/SGW_SGSN_RAW_CIPDR#RawLoad_Split13_00003_20240920171314.csv.gz";
 
         String name = FilenameUtils.getName(fileName);
         log.info("File Name :" + name);
 
         String baseName = FilenameUtils.getBaseName(fileName);
         log.info("File baseName :" + baseName);
+
+        String removeExtensionName = FilenameUtils.removeExtension(name);
+        log.info("File removeExtension :" + removeExtensionName);
+
+        removeExtensionName = StringUtils.remove(removeExtensionName, "#");
+        String extension = FilenameUtils.getExtension(removeExtensionName);
+        if (StringUtils.isNotBlank(extension)) {
+            removeExtensionName = StringUtils.replace(FilenameUtils.removeExtension(removeExtensionName), ".", "_")
+                    + '.' + extension;
+        } else {
+            removeExtensionName = StringUtils.replace(removeExtensionName, ".", "_");
+        }
+
+        log.info("File processed :" + removeExtensionName);
 
         String path = FilenameUtils.getPath(fileName);
         log.info("path Name :" + path);
