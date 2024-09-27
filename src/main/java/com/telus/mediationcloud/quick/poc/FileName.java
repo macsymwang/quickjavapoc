@@ -113,8 +113,7 @@ public class FileName implements CommandLineRunner {
         log.info("convert to dateFormatEDR:" + day);
         getMaxDate();
 
-        String specialFileName = "inbox/subfolder/SGW_SGSN_RAW_CIPDR_RawLoad_Split13_00003_20240920171314.csv.gz";
-        processFileName(specialFileName);
+        processFileName();
 
     }
 
@@ -132,11 +131,14 @@ public class FileName implements CommandLineRunner {
         return output;
     }
 
-    private void processFileName(String fileName) {
-        fileName = "";
+    private void processFileName() {
+        String fileName = "inbox/subfolder/SGW_SGSN_RAW.CIPDR#RawLoad_Split13_00003_20240920171314.csv.gz";
 
         String name = FilenameUtils.getName(fileName);
         log.info("File Name :" + name);
+
+        String baseName = FilenameUtils.getBaseName(fileName);
+        log.info("File baseName :" + baseName);
 
         String path = FilenameUtils.getPath(fileName);
         log.info("path Name :" + path);
